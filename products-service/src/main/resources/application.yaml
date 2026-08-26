@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: products-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/product_db
+    username: postgres
+    password: 12345
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  hikari:
+    # Maximum number of connections in the pool
+    maximum-pool-size: 10
+
+    # Minimum idle connections
+    minimum-idle: 5
+
+    # Maximum time a connection can remain idle
+    idle-timeout: 30000
+
+    # Maximum lifetime of a connection
+    max-lifetime: 1800000
+
+    # Maximum time to wait for a connection
+    connection-timeout: 30000
+
+    # Validation timeout
+    validation-timeout: 5000
+
+    # Name of the connection pool
+    pool-name: MyAppHikariPool
+
+    # Keep connections alive
+    keepalive-time: 30000
