@@ -31,7 +31,7 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String shortDescription;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String longDescription;
     private Double price;
     private Integer discount;
@@ -39,9 +39,6 @@ public class Product {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> productImages = new ArrayList<>();
-
-//    @ManyToOne
-//    private Category category;
 
     @ManyToMany(mappedBy = "products")
     private List<Category> categories = new ArrayList<>();
