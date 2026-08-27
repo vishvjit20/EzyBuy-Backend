@@ -17,6 +17,12 @@
         <module name="ai-service" />
         <module name="notifications-service" />
       </profile>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="service-discovery" />
+      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
@@ -27,6 +33,7 @@
       <module name="notifications-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="products-service" options="-parameters" />
+      <module name="service-discovery" options="-parameters" />
       <module name="users-service" options="-parameters" />
     </option>
   </component>

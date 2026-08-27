@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,5 +42,8 @@ public class ProductDto {
     private List<String> productImages;
     private List<CategoryDto> categories;
     private List<ReviewDto> reviews;
+
+    private Instant createdAt;
+    private Instant updatedAt;
 
 }
