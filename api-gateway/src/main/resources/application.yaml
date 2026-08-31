@@ -9,6 +9,11 @@ spring:
             locator:
               enabled: false
               lower-case-service-id: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 60000
 
 management:
   endpoints:
@@ -32,3 +37,11 @@ eureka:
 product:
   service:
     id: lb://PRODUCT-SERVICE
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000

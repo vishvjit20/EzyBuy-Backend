@@ -16,5 +16,4 @@ public class ProductsServiceApplication {
 		System.out.println("JVM Timezone: " + TimeZone.getDefault());
 		SpringApplication.run(ProductsServiceApplication.class, args);
 	}
-
 }

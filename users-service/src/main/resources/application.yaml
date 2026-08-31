@@ -1,3 +1,10 @@
 spring:
   application:
-    name: users-service
+    name: USERS-SERVICE
+  config:
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8079}
+  profiles:
+    active: dev
+
+server:
+  port: 8085
