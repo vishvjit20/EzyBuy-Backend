@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="config-server" />
+        <module name="common-service" />
         <module name="service-discovery" />
       </profile>
       <profile name="Annotation profile for inventory-service" enabled="true">
@@ -32,6 +33,7 @@
       <module name="ai-service" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="cart-order-service" options="-parameters" />
+      <module name="common-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="inventory-service" options="-parameters" />
       <module name="notifications-service" options="-parameters" />
