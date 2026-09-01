@@ -1,0 +1,12 @@
+package com.vj.ezybuy.cart_order.exception;
+
+public class ExternalServiceException extends RuntimeException {
+
+	public ExternalServiceException(String message) {
+		super(message);
+	}
+
+	public ExternalServiceException(String message, Throwable cause) {
+		super(message, cause);
+	}
+}
