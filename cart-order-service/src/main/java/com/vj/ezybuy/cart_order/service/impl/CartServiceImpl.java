@@ -20,6 +20,7 @@ import com.vj.ezybuy.cart_order.exception.ResourceNotFoundException;
 import com.vj.ezybuy.cart_order.repository.CartRepository;
 import com.vj.ezybuy.cart_order.service.CartService;
 import com.vj.ezybuy.common.payload.ProductSnapshot;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -27,18 +28,11 @@ import org.springframework.util.StringUtils;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
 
 	private final CartRepository cartRepository;
-
-	//product client helps us to get product from product service
 	private final ProductClient productClient;
-
-	// it inject the dependencies
-	public CartServiceImpl(CartRepository cartRepository, ProductClient productClient) {
-		this.cartRepository = cartRepository;
-		this.productClient = productClient;
-	}
 
 	@Override
 	@Transactional

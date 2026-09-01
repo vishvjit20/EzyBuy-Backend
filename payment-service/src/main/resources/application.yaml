@@ -1,3 +1,10 @@
 spring:
   application:
-    name: payment-service
+    name: PAYMENT-SERVICE
+  config:
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8079}
+  profiles:
+    active: dev
+
+server:
+  port: 8086

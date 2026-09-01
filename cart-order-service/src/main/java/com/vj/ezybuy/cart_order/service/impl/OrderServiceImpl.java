@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
 import com.vj.ezybuy.cart_order.client.InventoryClient;
 import com.vj.ezybuy.cart_order.client.ProductClient;
 import com.vj.ezybuy.cart_order.dto.*;
@@ -15,19 +14,19 @@ import com.vj.ezybuy.cart_order.entity.*;
 import com.vj.ezybuy.cart_order.exception.BusinessRuleException;
 import com.vj.ezybuy.cart_order.exception.ExternalServiceException;
 import com.vj.ezybuy.cart_order.exception.ResourceNotFoundException;
+import com.vj.ezybuy.cart_order.producer.OrderEventPublisher;
 import com.vj.ezybuy.cart_order.repository.CartRepository;
 import com.vj.ezybuy.cart_order.repository.OrderRepository;
 import com.vj.ezybuy.cart_order.service.OrderService;
+import com.vj.ezybuy.common.events.OrderEvent;
 import com.vj.ezybuy.common.payload.ProductSnapshot;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestClient;
-import org.springframework.web.client.RestTemplate;
+
 
 @Slf4j
 @Service
@@ -39,10 +38,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final InventoryClient inventoryClient;
 
-    private final RestClient restClient;
-
-    private final RestTemplate restTemplate;
     private final ProductClient productClient;
+    private final OrderEventPublisher  orderEventPublisher;
 
     private ProductSnapshot getProduct(String productId) {
 
@@ -114,6 +111,14 @@ public class OrderServiceImpl implements OrderService {
             cart.setCheckedOutAt(Instant.now());
             cart.getItems().clear();
             cartRepository.save(cart);
+
+            OrderEvent orderEvent = new OrderEvent();
+            orderEvent.setOrderId(saved.getId());
+            orderEvent.setMessage("Order is created successfully...");
+            orderEvent.setTotalAmount(saved.getTotalAmount());
+            orderEvent.setUserId(saved.getUserId());
+            orderEvent.setStatus(saved.getStatus().toString());
+            orderEventPublisher.publishOrderCreatedEvent(orderEvent);
 
             return toResponse(saved);
         } catch (RuntimeException ex) {
