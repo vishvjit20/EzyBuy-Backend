@@ -1,6 +1,6 @@
 package com.vj.ezybuy.users.service;
 
-import com.vj.ezybuy.users.dto.UserDto;
+import com.vj.ezybuy.users.dto.*;
 import com.vj.ezybuy.users.entity.Role;
 
 import java.util.List;
@@ -21,4 +21,8 @@ public interface UserService {
     void deleteUser(UUID id);
 
     void changeUserRole(UUID id, Role role);
+
+    LoginResponse login(LoginRequest loginRequest);
+
+    TokenRefreshResponse refreshToken(TokenRefreshRequest refreshRequest);
 }

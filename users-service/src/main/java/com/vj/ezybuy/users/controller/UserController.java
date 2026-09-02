@@ -1,7 +1,6 @@
 package com.vj.ezybuy.users.controller;
 
-import com.vj.ezybuy.users.dto.ChangeRoleRequest;
-import com.vj.ezybuy.users.dto.UserDto;
+import com.vj.ezybuy.users.dto.*;
 import com.vj.ezybuy.users.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +21,20 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
         return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) throws Exception {
+        if (loginRequest.getEmail().equals("ex@gmail.com")) {
+            throw new RuntimeException("invalid data");
+        }
+
+        return ResponseEntity.ok(userService.login(loginRequest));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<TokenRefreshResponse> refresh(@Valid @RequestBody TokenRefreshRequest refreshRequest) {
+        return ResponseEntity.ok(userService.refreshToken(refreshRequest));
     }
 
     @GetMapping("/{id}")
